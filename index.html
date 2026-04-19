@@ -1,324 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redlands Coast & Islands Data</title>
-    <style>
-        :root {
-            --ocean-blue: #0A3A5C;
-            --sea-teal: #1F8A89;
-            --wave-light: #A3D5D5;
-            --sand-grey: #F7F5F0;
-            --white: #FFFFFF;
-            --text-dark: #2C3E50;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redlands Coast Intelligence Dashboard</title>
 
-        * {
-            box-sizing: border-box;
-            font-family: system-ui, -apple-system, sans-serif;
-        }
+<style>
+:root{
+--ocean:#0A3A5C;
+--teal:#1F8A89;
+--light:#A3D5D5;
+--bg:#F7F5F0;
+--white:#fff;
+--text:#2C3E50;
+}
 
-        body {
-            background-color: var(--white);
-            color: var(--text-dark);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
+*{box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif}
+body{margin:0;background:var(--white);color:var(--text);line-height:1.5}
 
-        header {
-            background-color: var(--sand-grey);
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 4px solid var(--sea-teal);
-        }
+header{
+background:var(--bg);
+padding:30px 20px;
+text-align:center;
+border-bottom:4px solid var(--teal)
+}
 
-        h1 {
-            color: var(--ocean-blue);
-            margin: 0 0 10px 0;
-            font-size: 2.2rem;
-        }
+h1{margin:0;color:var(--ocean)}
+.subtitle{color:var(--teal)}
 
-        p.subtitle {
-            color: var(--sea-teal);
-            font-size: 1.1rem;
-            margin: 0;
-        }
+.container{max-width:1100px;margin:30px auto;padding:0 15px}
 
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+.controls{
+display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:25px
+}
 
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
+button{
+padding:10px 18px;border-radius:20px;
+border:2px solid var(--ocean);
+background:#fff;color:var(--ocean);
+font-weight:600;cursor:pointer
+}
 
-        button {
-            background: var(--white);
-            color: var(--ocean-blue);
-            border: 2px solid var(--ocean-blue);
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+button.active{background:var(--ocean);color:#fff}
 
-        button:hover {
-            background: var(--wave-light);
-            border-color: var(--sea-teal);
-        }
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:18px
+}
 
-        button.active {
-            background: var(--ocean-blue);
-            color: var(--white);
-            border-color: var(--ocean-blue);
-        }
+.card{
+background:var(--bg);
+padding:18px;
+border-radius:14px;
+box-shadow:0 3px 8px rgba(0,0,0,.05)
+}
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
-        }
+.card h3{margin-top:0;color:var(--ocean)}
 
-        .card {
-            background: var(--sand-grey);
-            padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            transition: transform 0.3s ease;
-        }
+.metric{
+font-size:2rem;font-weight:700;color:var(--teal)
+}
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+.label{font-size:.85rem;color:#555}
 
-        .card h3 {
-            margin-top: 0;
-            color: var(--ocean-blue);
-            font-size: 1.2rem;
-            border-bottom: 2px solid var(--wave-light);
-            padding-bottom: 10px;
-        }
+.progress{
+height:10px;background:#ddd;border-radius:5px;margin:6px 0
+}
 
-        .metric {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--sea-teal);
-            margin: 10px 0;
-        }
+.fill{height:100%;background:var(--teal)}
 
-        .label {
-            font-size: 0.9rem;
-            color: #555;
-        }
+.ocean{background:var(--ocean)}
+.light{background:var(--light)}
 
-        .slider-group {
-            margin-top: 20px;
-        }
+ul{padding-left:18px;margin:10px 0}
 
-        .slider-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 12px;
-            background-color: #E0E0E0;
-            border-radius: 6px;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background-color: var(--sea-teal);
-            transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .ocean-fill { background-color: var(--ocean-blue); }
-        .wave-fill { background-color: var(--wave-light); }
-        
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            .controls { flex-direction: column; }
-            button { width: 100%; }
-        }
-    </style>
+</style>
 </head>
+
 <body>
 
-    <header>
-        <h1>Regional Prosperity Metrics</h1>
-        <p class="subtitle">Catalysing Data for Coastal Ecology and Community Stewardship</p>
-    </header>
+<header>
+<h1>Redlands Coast Intelligence</h1>
+<p class="subtitle">Economic System • Reality Layer • Strategic Signals</p>
+</header>
 
-    <div class="container">
-        <div class="controls">
-            <button class="active" onclick="updateData('region')" id="btn-region">Redlands Coast Region</button>
-            <button onclick="updateData('growth')" id="btn-growth">High Growth & Island Focus</button>
-            <button onclick="updateData('deepdive')" id="btn-deepdive">Industry & Youth</button>
-        </div>
+<div class="container">
 
-        <div class="grid">
-            <div class="card">
-                <h3>Population Overview</h3>
-                <div class="metric" id="pop-total">170,225</div>
-                <div class="label" id="pop-label">Estimated Resident Population (2024)</div>
-                <br>
-                <div class="metric" style="font-size: 1.8rem;" id="pop-growth">2.05%</div>
-                <div class="label" id="pop-growth-label">Annual Growth Rate (2024)</div>
-            </div>
+<div class="controls">
+<button class="active" onclick="view('core')">Core</button>
+<button onclick="view('economy')">Economy</button>
+<button onclick="view('system')">System Stress</button>
+<button onclick="view('islands')">Islands</button>
+<button onclick="view('projects')">Projects</button>
+</div>
 
-            <div class="card">
-                <h3>Economic Stewardship</h3>
-                <div class="metric" id="eco-grp">$8 Billion</div>
-                <div class="label">Gross Regional Product</div>
-                <br>
-                <div class="metric" style="font-size: 1.8rem;" id="eco-jobs">55,454</div>
-                <div class="label">Local Jobs Catalysed</div>
-            </div>
+<div class="grid" id="dashboard"></div>
 
-            <div class="card">
-                <h3>Demographics & Impact</h3>
-                <div class="slider-group">
-                    <div class="slider-label"><span>0 to 14 Years</span><span id="age-1-val">17.8%</span></div>
-                    <div class="progress-bar"><div class="progress-fill wave-fill" id="age-1-bar" style="width: 17.8%"></div></div>
-                    
-                    <div class="slider-label"><span>15 to 64 Years</span><span id="age-2-val">61.3%</span></div>
-                    <div class="progress-bar"><div class="progress-fill sea-fill" id="age-2-bar" style="width: 61.3%"></div></div>
-                    
-                    <div class="slider-label"><span>65 and Over</span><span id="age-3-val">20.9%</span></div>
-                    <div class="progress-bar"><div class="progress-fill ocean-fill" id="age-3-bar" style="width: 20.9%"></div></div>
-                </div>
-            </div>
+</div>
 
-            <div class="card">
-                <h3>Ecosystem Sectors</h3>
-                <div class="slider-group" id="sector-group">
-                    <div class="slider-label"><span id="sec-1-title">Health Care & Social Assistance</span><span id="sec-1-val">21%</span></div>
-                    <div class="progress-bar"><div class="progress-fill ocean-fill" id="sec-1-bar" style="width: 21%"></div></div>
-                    
-                    <div class="slider-label"><span id="sec-2-title">Construction</span><span id="sec-2-val">14%</span></div>
-                    <div class="progress-bar"><div class="progress-fill sea-fill" id="sec-2-bar" style="width: 14%"></div></div>
-                    
-                    <div class="slider-label"><span id="sec-3-title">Retail Trade</span><span id="sec-3-val">13%</span></div>
-                    <div class="progress-bar"><div class="progress-fill wave-fill" id="sec-3-bar" style="width: 13%"></div></div>
-                </div>
-            </div>
-        </div>
-    </div>
+<script>
 
-    <script>
-        const dataSet = {
-            region: {
-                popTotal: "170,225",
-                popLabel: "Estimated Resident Population (2024)",
-                popGrowth: "2.05%",
-                popGrowthLabel: "Annual Growth Rate (2024)",
-                grp: "$8 Billion",
-                jobs: "55,454",
-                grpLabel: "Gross Regional Product",
-                jobsLabel: "Local Jobs Catalysed",
-                age1: "17.8", age2: "61.3", age3: "20.9",
-                age1Label: "0 to 14 Years", age2Label: "15 to 64 Years", age3Label: "65 and Over",
-                sec1Title: "Health Care & Social", sec1Val: "21",
-                sec2Title: "Construction", sec2Val: "14",
-                sec3Title: "Retail Trade", sec3Val: "13"
-            },
-            growth: {
-                popTotal: "12,000+",
-                popLabel: "Residents on Non-Mainland Islands",
-                popGrowth: "21.8%",
-                popGrowthLabel: "SMBI Population Growth (2020-2024)",
-                grp: "12,821",
-                jobs: "42.3%",
-                grpLabel: "Registered Regional Businesses",
-                jobsLabel: "Job Self-Containment (Stay Local)",
-                age1: "14.2", age2: "9.8", age3: "26.0", 
-                age1Label: "Thornlands", age2Label: "Redland Bay", age3Label: "Trade Skills",
-                sec1Title: "Thornlands Growth", sec1Val: "14.2",
-                sec2Title: "Redland Bay Growth", sec2Val: "9.8",
-                sec3Title: "Trade Qualifications", sec3Val: "26"
-            },
-            deepdive: {
-                popTotal: "25,000",
-                popLabel: "Young People Aged 12-24",
-                popGrowth: "24%",
-                popGrowthLabel: "Disengaged Youth in SMBI",
-                grp: "$716M",
-                jobs: "64%",
-                grpLabel: "Manufacturing Exports (>33% of total)",
-                jobsLabel: "Retail Tx from Outside Visitors",
-                age1: "9.85", age2: "57.1", age3: "10.7",
-                age1Label: "Youth Unemployment", age2Label: "Knowledge Workers Commuting Out", age3Label: "Tourism Economy %",
-                sec1Title: "Tourism Economy Value", sec1Val: "10.7",
-                sec2Title: "Manufacturing Sector", sec2Val: "7.2",
-                sec3Title: "Professional Services", sec3Val: "11.4"
-            }
-        };
+const data = {
 
-        function updateData(view) {
-            // Update button styles
-            document.getElementById('btn-region').classList.remove('active');
-            document.getElementById('btn-growth').classList.remove('active');
-            document.getElementById('btn-deepdive').classList.remove('active');
-            document.getElementById('btn-' + view).classList.add('active');
+core: [
+{title:"Population",metric:"170,225",label:"Residents (2024)"},
+{title:"Growth Rate",metric:"2.05%",label:"Annual"},
+{title:"GRP",metric:"$8B",label:"Gross Regional Product"},
+{title:"Jobs",metric:"55,454",label:"Local Employment"},
+{title:"Businesses",metric:"12,821",label:"Active"},
+{title:"Median Age",metric:"43",label:"Older demographic skew"}
+],
 
-            const data = dataSet[view];
+economy: [
+{title:"Health Sector",metric:"$1.02B",label:"Value Add"},
+{title:"Construction",metric:"$2.5B",label:"Total Output"},
+{title:"Retail",metric:"$553M",label:"Value Add"},
+{title:"Manufacturing",metric:"$716M",label:"Exports"},
+{title:"Tourism",metric:"$618M",label:"Value Add"},
+{title:"Knowledge Economy",metric:"$656M",label:"PSTS + Finance"}
+],
 
-            // Update Text Metrics
-            document.getElementById('pop-total').innerText = data.popTotal;
-            document.getElementById('pop-label').innerText = data.popLabel;
-            document.getElementById('pop-growth').innerText = data.popGrowth;
-            document.getElementById('pop-growth-label').innerText = data.popGrowthLabel;
-            
-            document.getElementById('eco-grp').innerText = data.grp;
-            document.getElementById('eco-jobs').innerText = data.jobs;
-            document.getElementById('eco-grp').nextElementSibling.innerText = data.grpLabel;
-            document.getElementById('eco-jobs').nextElementSibling.innerText = data.jobsLabel;
+system: [
+{title:"Job Self-Containment",metric:"42.3%",label:"Low retention"},
+{title:"Outbound Workers",metric:"4,000+",label:"Daily commuters"},
+{title:"Visitor Spend",metric:"64%",label:"External transactions"},
+{title:"Youth Challenge",metric:"High",label:"Retention issue"},
+{title:"Tourism Constraint",metric:"Supply",label:"Accommodation limits"},
+{title:"Skills Shortage",metric:"Growing",label:"Construction + services"}
+],
 
-            // Update Labels
-            document.getElementById('age-1-val').previousElementSibling.innerText = data.age1Label;
-            document.getElementById('age-2-val').previousElementSibling.innerText = data.age2Label;
-            document.getElementById('age-3-val').previousElementSibling.innerText = data.age3Label;
+islands: [
+{title:"Island Population",metric:"12,000+",label:"Distributed communities"},
+{title:"Transport Dependency",metric:"High",label:"Barge + ferry reliance"},
+{title:"Local Jobs",metric:"Limited",label:"Economic leakage"},
+{title:"Costs",metric:"High",label:"Freight + labour"},
+{title:"Opportunity",metric:"Circular Economy",label:"Local resilience"},
+{title:"Tourism Potential",metric:"High",label:"Underdeveloped"}
+],
 
-            // Update Progress Bars and Values
-            document.getElementById('age-1-val').innerText = data.age1 + "%";
-            document.getElementById('age-1-bar').style.width = data.age1 + "%";
-            
-            document.getElementById('age-2-val').innerText = data.age2 + "%";
-            document.getElementById('age-2-bar').style.width = data.age2 + "%";
-            
-            document.getElementById('age-3-val').innerText = data.age3 + "%";
-            document.getElementById('age-3-bar').style.width = data.age3 + "%";
+projects: [
+{title:"Birkdale Precinct",metric:"Olympics",label:"Whitewater centre"},
+{title:"Capalaba Revitalisation",metric:"$250M",label:"Urban centre"},
+{title:"Toondah Harbour",metric:"Gateway",label:"Tourism + ferry"},
+{title:"Weinam Creek",metric:"700 jobs",label:"Transport hub"},
+{title:"Dunwich Upgrade",metric:"$4M",label:"Island connectivity"},
+{title:"Cleveland Revitalisation",metric:"$12M+",label:"Urban renewal"}
+]
 
-            // Update Sectors
-            document.getElementById('sec-1-title').innerText = data.sec1Title;
-            document.getElementById('sec-1-val').innerText = data.sec1Val + "%";
-            document.getElementById('sec-1-bar').style.width = data.sec1Val + "%";
+}
 
-            document.getElementById('sec-2-title').innerText = data.sec2Title;
-            document.getElementById('sec-2-val').innerText = data.sec2Val + "%";
-            document.getElementById('sec-2-bar').style.width = data.sec2Val + "%";
+function view(type){
+document.querySelectorAll("button").forEach(b=>b.classList.remove("active"))
+event.target.classList.add("active")
 
-            document.getElementById('sec-3-title').innerText = data.sec3Title;
-            document.getElementById('sec-3-val').innerText = data.sec3Val + "%";
-            document.getElementById('sec-3-bar').style.width = data.sec3Val + "%";
-        }
-    </script>
+const container = document.getElementById("dashboard")
+container.innerHTML=""
+
+data[type].forEach(item=>{
+container.innerHTML += `
+<div class="card">
+<h3>${item.title}</h3>
+<div class="metric">${item.metric}</div>
+<div class="label">${item.label}</div>
+</div>
+`
+})
+}
+
+view('core')
+
+</script>
+
 </body>
 </html>

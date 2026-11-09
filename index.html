@@ -1,179 +1,277 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Redlands Coast Intelligence Dashboard</title>
-
-<style>
-:root{
---ocean:#0A3A5C;
---teal:#1F8A89;
---light:#A3D5D5;
---bg:#F7F5F0;
---white:#fff;
---text:#2C3E50;
-}
-
-*{box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif}
-body{margin:0;background:var(--white);color:var(--text);line-height:1.5}
-
-header{
-background:var(--bg);
-padding:30px 20px;
-text-align:center;
-border-bottom:4px solid var(--teal)
-}
-
-h1{margin:0;color:var(--ocean)}
-.subtitle{color:var(--teal)}
-
-.container{max-width:1100px;margin:30px auto;padding:0 15px}
-
-.controls{
-display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:25px
-}
-
-button{
-padding:10px 18px;border-radius:20px;
-border:2px solid var(--ocean);
-background:#fff;color:var(--ocean);
-font-weight:600;cursor:pointer
-}
-
-button.active{background:var(--ocean);color:#fff}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:18px
-}
-
-.card{
-background:var(--bg);
-padding:18px;
-border-radius:14px;
-box-shadow:0 3px 8px rgba(0,0,0,.05)
-}
-
-.card h3{margin-top:0;color:var(--ocean)}
-
-.metric{
-font-size:2rem;font-weight:700;color:var(--teal)
-}
-
-.label{font-size:.85rem;color:#555}
-
-.progress{
-height:10px;background:#ddd;border-radius:5px;margin:6px 0
-}
-
-.fill{height:100%;background:var(--teal)}
-
-.ocean{background:var(--ocean)}
-.light{background:var(--light)}
-
-ul{padding-left:18px;margin:10px 0}
-
-</style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-raster-32.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-raster-192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon-raster-180.png">
+<title>Redlands Coast Intelligence | Local data and council decisions</title>
+<meta name="description" content="Dated Redlands Coast population, economy, island, project and budget information, with direct links to official council minutes and meeting broadcasts.">
+<meta name="theme-color" content="#0a3a5c">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-raster-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-raster-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon-raster-180.png">
+<script src="assets/dashboard.js" defer></script>
 </head>
-
-<body>
-
+<body id="top">
+<a class="skip-link" href="#dashboard">Skip to dashboard</a>
 <header>
-<h1>Redlands Coast Intelligence</h1>
-<p class="subtitle">Economic System • Reality Layer • Strategic Signals</p>
+  <h1>Redlands Coast Intelligence</h1>
+  <p class="subtitle">Local data, public decisions and strategic signals</p>
+  <p class="header-note">An independent dashboard by Luke Nathan Hayes. Figures and project updates link to their public sources.</p>
+  <nav aria-label="Council quick links"><ul class="quick-links">
+    <li><a href="https://www.redland.qld.gov.au/About-Council/Council-meetings/Council-meeting-minutes-and-agendas">Minutes &amp; agendas</a></li>
+    <li><a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">Council budget 2026-27</a></li>
+    <li><a href="https://www.youtube.com/user/RedlandCityCouncil">Council on YouTube</a></li>
+    <li><a href="https://www.redland.qld.gov.au/About-Council/Council-meetings/Council-meeting-livestreaming-and-video-recordings">Live meetings &amp; recordings</a></li>
+  </ul></nav>
 </header>
-
-<div class="container">
-
-<div class="controls">
-<button class="active" onclick="view('core')">Core</button>
-<button onclick="view('economy')">Economy</button>
-<button onclick="view('system')">System Stress</button>
-<button onclick="view('islands')">Islands</button>
-<button onclick="view('projects')">Projects</button>
-</div>
-
-<div class="grid" id="dashboard"></div>
-
-</div>
-
-<script>
-
-const data = {
-
-core: [
-{title:"Population",metric:"170,225",label:"Residents (2024)"},
-{title:"Growth Rate",metric:"2.05%",label:"Annual"},
-{title:"GRP",metric:"$8B",label:"Gross Regional Product"},
-{title:"Jobs",metric:"55,454",label:"Local Employment"},
-{title:"Businesses",metric:"12,821",label:"Active"},
-{title:"Median Age",metric:"43",label:"Older demographic skew"}
-],
-
-economy: [
-{title:"Health Sector",metric:"$1.02B",label:"Value Add"},
-{title:"Construction",metric:"$2.5B",label:"Total Output"},
-{title:"Retail",metric:"$553M",label:"Value Add"},
-{title:"Manufacturing",metric:"$716M",label:"Exports"},
-{title:"Tourism",metric:"$618M",label:"Value Add"},
-{title:"Knowledge Economy",metric:"$656M",label:"PSTS + Finance"}
-],
-
-system: [
-{title:"Job Self-Containment",metric:"42.3%",label:"Low retention"},
-{title:"Outbound Workers",metric:"4,000+",label:"Daily commuters"},
-{title:"Visitor Spend",metric:"64%",label:"External transactions"},
-{title:"Youth Challenge",metric:"High",label:"Retention issue"},
-{title:"Tourism Constraint",metric:"Supply",label:"Accommodation limits"},
-{title:"Skills Shortage",metric:"Growing",label:"Construction + services"}
-],
-
-islands: [
-{title:"Island Population",metric:"12,000+",label:"Distributed communities"},
-{title:"Transport Dependency",metric:"High",label:"Ferry terminal parking issues"},
-{title:"Local Jobs",metric:"Limited",label:"Economic leakage"},
-{title:"Costs",metric:"High",label:"Freight + labour"},
-{title:"Opportunity",metric:"Circular Economy",label:"Local resilience"},
-{title:"Tourism Potential",metric:"High",label:"Underdeveloped"}
-],
-
-projects: [
-{title:"Birkdale Precinct",metric:"Olympics",label:"Whitewater centre"},
-{title:"Capalaba Revitalisation",metric:"$250M",label:"Urban centre"},
-{title:"Toondah Harbour",metric:"Gateway",label:"Tourism + ferry"},
-{title:"Weinam Creek",metric:"700 jobs",label:"Transport hub"},
-{title:"Dunwich Upgrade",metric:"$41M",label:"Island connectivity"},
-{title:"Cleveland Revitalisation",metric:"$12M+",label:"Urban renewal"}
-]
-
-}
-
-function view(type){
-document.querySelectorAll("button").forEach(b=>b.classList.remove("active"))
-event.target.classList.add("active")
-
-const container = document.getElementById("dashboard")
-container.innerHTML=""
-
-data[type].forEach(item=>{
-container.innerHTML += `
-<div class="card">
-<h3>${item.title}</h3>
-<div class="metric">${item.metric}</div>
-<div class="label">${item.label}</div>
-</div>
-`
-})
-}
-
-view('core')
-
-</script>
-
+<main class="container" id="dashboard">
+  <aside class="review-note" aria-label="Data dates"><p><strong>Sources checked 9 November 2026.</strong> Each card shows its reference period. This is a sourced snapshot, not a live data feed.</p><p>Budget figures describe 2026-27. Census figures describe 2021; economic figures below identify their own earlier periods.</p></aside>
+  <noscript><style>.dashboard-panel[hidden]{display:block!important}.controls,.section-nav{display:none}.dashboard-panel{margin-top:36px}</style><p class="no-script-note">All dashboard sections are shown below. JavaScript adds section switching.</p></noscript>
+  <nav class="controls" aria-label="Dashboard sections"><button type="button" data-view="core" aria-controls="core" aria-pressed="true" class="active">Core</button>
+<button type="button" data-view="economy" aria-controls="economy" aria-pressed="false">Economy</button>
+<button type="button" data-view="system" aria-controls="system" aria-pressed="false">Household costs</button>
+<button type="button" data-view="islands" aria-controls="islands" aria-pressed="false">Islands</button>
+<button type="button" data-view="projects" aria-controls="projects" aria-pressed="false">Projects</button>
+<button type="button" data-view="budget" aria-controls="budget" aria-pressed="false">Budget &amp; services</button></nav>
+  <div id="dashboard-views"><section class="dashboard-panel" id="core" data-panel="core" aria-labelledby="core-heading">
+  <h2 id="core-heading" tabindex="-1">Core</h2>
+  <p class="section-intro">A dated overview of Redland City. Population estimates, Census measures and economic models cover different periods.</p>
+  <div class="grid"><article class="card">
+    <h3>Resident population</h3><div class="metric">172,831</div>
+    <p class="period">30 June 2025</p><p class="card-detail">Preliminary estimated resident population, Redland City.</p>
+    <p class="card-source">Source: <a href="https://www.qgso.qld.gov.au/issues/3106/population-growth-regional-qld-2024-25.pdf">Queensland Government Statistician&#39;s Office, using ABS Regional population released 31 March 2026</a></p>
+  </article>
+<article class="card">
+    <h3>Annual population increase</h3><div class="metric">+2,891</div>
+    <p class="period">2024-25</p><p class="card-detail">Additional residents using the revised 2024 comparison.</p>
+    <p class="card-source">Source: <a href="https://www.qgso.qld.gov.au/issues/3106/population-growth-regional-qld-2024-25.pdf">Queensland Government Statistician&#39;s Office, using ABS Regional population released 31 March 2026</a></p>
+  </article>
+<article class="card">
+    <h3>Gross regional product</h3><div class="metric">$8.01B</div>
+    <p class="period">Year ending June 2024</p><p class="card-detail">NIEIR modelled estimate, reproduced in Council&#39;s December 2025 plan.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/assets/public/v/3/community-safety-and-health/documents/20251219-local-disaster-management-plan-control-copy.pdf">Redland City Council, reproducing NIEIR and ABS economic data</a></p>
+  </article>
+<article class="card">
+    <h3>Local jobs</h3><div class="metric">55,454</div>
+    <p class="period">2024 economic snapshot</p><p class="card-detail">Jobs located in Redland City, rather than the number of employed residents.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/assets/public/v/3/community-safety-and-health/documents/20251219-local-disaster-management-plan-control-copy.pdf">Redland City Council, reproducing NIEIR and ABS economic data</a></p>
+  </article>
+<article class="card">
+    <h3>Local businesses</h3><div class="metric">12,821</div>
+    <p class="period">ABS 2024</p><p class="card-detail">Business count reported in Council&#39;s economic snapshot.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/assets/public/v/3/community-safety-and-health/documents/20251219-local-disaster-management-plan-control-copy.pdf">Redland City Council, reproducing NIEIR and ABS economic data</a></p>
+  </article>
+<article class="card">
+    <h3>Median age</h3><div class="metric">43 years</div>
+    <p class="period">2021 Census</p><p class="card-detail">Redland local government area. This is a Census measure, not a 2026 estimate.</p>
+    <p class="card-source">Source: <a href="https://www.abs.gov.au/census/find-census-data/quickstats/2021/LGA36250">Australian Bureau of Statistics</a></p>
+  </article></div>
+</section>
+<section class="dashboard-panel" id="economy" data-panel="economy" aria-labelledby="economy-heading" hidden>
+  <h2 id="economy-heading" tabindex="-1">Economy</h2>
+  <p class="section-intro">Economic measures verified in Council&#39;s December 2025 Local Disaster Management Plan. Output, value added and employment measure different things.</p>
+  <div class="grid"><article class="card">
+    <h3>Largest industry in snapshot</h3><div class="metric metric--text">Health care &amp; social assistance</div>
+    <p class="period">2024 economic snapshot</p><p class="card-detail">Industry identified in Council&#39;s published economic snapshot.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/assets/public/v/3/community-safety-and-health/documents/20251219-local-disaster-management-plan-control-copy.pdf">Redland City Council, reproducing NIEIR and ABS economic data</a></p>
+  </article>
+<article class="card">
+    <h3>Employed residents</h3><div class="metric">89,006</div>
+    <p class="period">2024 economic snapshot</p><p class="card-detail">Employed Redland residents, including people whose jobs are outside the city.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/assets/public/v/3/community-safety-and-health/documents/20251219-local-disaster-management-plan-control-copy.pdf">Redland City Council, reproducing NIEIR and ABS economic data</a></p>
+  </article>
+<article class="card">
+    <h3>Direct tourism output</h3><div class="metric">$433.88M</div>
+    <p class="period">2023-24</p><p class="card-detail">Direct tourism output and sales.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/assets/public/v/3/community-safety-and-health/documents/20251219-local-disaster-management-plan-control-copy.pdf">Redland City Council, reproducing NIEIR and ABS economic data</a></p>
+  </article>
+<article class="card">
+    <h3>Direct tourism value added</h3><div class="metric">$232.88M</div>
+    <p class="period">2023-24</p><p class="card-detail">Tourism&#39;s direct contribution to value added, distinct from sales.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/assets/public/v/3/community-safety-and-health/documents/20251219-local-disaster-management-plan-control-copy.pdf">Redland City Council, reproducing NIEIR and ABS economic data</a></p>
+  </article>
+<article class="card">
+    <h3>Direct tourism employment</h3><div class="metric">2,974 jobs</div>
+    <p class="period">2023-24</p><p class="card-detail">Reported as 5.4% of local industry employment.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/assets/public/v/3/community-safety-and-health/documents/20251219-local-disaster-management-plan-control-copy.pdf">Redland City Council, reproducing NIEIR and ABS economic data</a></p>
+  </article>
+<article class="card">
+    <h3>Agriculture, forestry &amp; fishing</h3><div class="metric">$209.7M</div>
+    <p class="period">2023-24</p><p class="card-detail">Industry output, not household income or farm profit.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/assets/public/v/3/community-safety-and-health/documents/20251219-local-disaster-management-plan-control-copy.pdf">Redland City Council, reproducing NIEIR and ABS economic data</a></p>
+  </article></div>
+</section>
+<section class="dashboard-panel" id="system" data-panel="system" aria-labelledby="system-heading" hidden>
+  <h2 id="system-heading" tabindex="-1">Household costs</h2>
+  <p class="section-intro">Council&#39;s 2026-27 rates and charges. The general-rate percentage is one component of a rates notice; utility and separate charges have their own changes.</p>
+  <div class="grid"><article class="card">
+    <h3>Median general-rate increase</h3><div class="metric">5.47%</div>
+    <p class="period">2026-27</p><p class="card-detail">Owner-occupied Category 1A median property: about $85.30 a year. Other properties differ.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">Redland City Council</a></p>
+  </article>
+<article class="card">
+    <h3>Water and wastewater</h3><div class="metric">+10.2%</div>
+    <p class="period">2026-27</p><p class="card-detail">Published increase for fixed and consumption charges.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">Redland City Council</a></p>
+  </article>
+<article class="card">
+    <h3>Waste utility charge</h3><div class="metric">+18.53%</div>
+    <p class="period">2026-27</p><p class="card-detail">Amount depends on the household&#39;s bin combination.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">Redland City Council</a></p>
+  </article>
+<article class="card">
+    <h3>Environment and coastal charge</h3><div class="metric">$280.48</div>
+    <p class="period">2026-27, per year</p><p class="card-detail">Separate charge, an increase of 8.71%.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">Redland City Council</a></p>
+  </article>
+<article class="card">
+    <h3>Landfill remediation charge</h3><div class="metric">$99.52</div>
+    <p class="period">2026-27, per year</p><p class="card-detail">Separate charge, an increase of 28.25%.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">Redland City Council</a></p>
+  </article>
+<article class="card">
+    <h3>Pensioner council rebate</h3><div class="metric">$335 / $167.50</div>
+    <p class="period">2026-27, per year</p><p class="card-detail">Full / part pensioners respectively, subject to eligibility.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">Redland City Council</a></p>
+  </article></div>
+</section>
+<section class="dashboard-panel" id="islands" data-panel="islands" aria-labelledby="islands-heading" hidden>
+  <h2 id="islands-heading" tabindex="-1">Islands</h2>
+  <p class="section-intro">2021 Census baselines for two island geographies. Council&#39;s Southern Moreton Bay Islands snapshot includes Coochiemudlo, as well as the four SMBI islands. These are resident counts, not visitor numbers.</p>
+  <div class="grid"><article class="card">
+    <h3>Southern island population</h3><div class="metric">8,481</div>
+    <p class="period">2021 Census</p><p class="card-detail">Southern Moreton Bay Islands statistical area, including Coochiemudlo.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/assets/public/v/1/business-and-investment/documents/city-profile-and-data-hub/southern_moreton_bay_islands.pdf">Redland City Council, using the 2021 ABS Census</a></p>
+  </article>
+<article class="card">
+    <h3>Southern islands median age</h3><div class="metric">61 years</div>
+    <p class="period">2021 Census</p><p class="card-detail">Same statistical area, including Coochiemudlo.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/assets/public/v/1/business-and-investment/documents/city-profile-and-data-hub/southern_moreton_bay_islands.pdf">Redland City Council, using the 2021 ABS Census</a></p>
+  </article>
+<article class="card">
+    <h3>Southern islands aged 65+</h3><div class="metric">39.6%</div>
+    <p class="period">2021 Census</p><p class="card-detail">Share of residents in the same statistical area.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/assets/public/v/1/business-and-investment/documents/city-profile-and-data-hub/southern_moreton_bay_islands.pdf">Redland City Council, using the 2021 ABS Census</a></p>
+  </article>
+<article class="card">
+    <h3>Minjerribah population</h3><div class="metric">2,156</div>
+    <p class="period">2021 Census</p><p class="card-detail">North Stradbroke Island as a whole.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/sharedassets/public/v/1/business-and-investment/city-profile-and-data-hub/north_stradbroke_island__minjerribah_.pdf">Redland City Council, using the 2021 ABS Census</a></p>
+  </article>
+<article class="card">
+    <h3>Minjerribah median age</h3><div class="metric">52 years</div>
+    <p class="period">2021 Census</p><p class="card-detail">Whole-island resident population.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/sharedassets/public/v/1/business-and-investment/city-profile-and-data-hub/north_stradbroke_island__minjerribah_.pdf">Redland City Council, using the 2021 ABS Census</a></p>
+  </article>
+<article class="card">
+    <h3>Minjerribah aged 65+</h3><div class="metric">29.4%</div>
+    <p class="period">2021 Census</p><p class="card-detail">Share of whole-island residents.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/files/sharedassets/public/v/1/business-and-investment/city-profile-and-data-hub/north_stradbroke_island__minjerribah_.pdf">Redland City Council, using the 2021 ABS Census</a></p>
+  </article></div>
+</section>
+<section class="dashboard-panel" id="projects" data-panel="projects" aria-labelledby="projects-heading" hidden>
+  <h2 id="projects-heading" tabindex="-1">Projects</h2>
+  <p class="section-intro">Dated updates from the responsible public bodies. Planning milestones, project estimates and construction are distinguished below.</p>
+  <div class="grid"><article class="card">
+    <h3>Birkdale Community Precinct</h3><div class="metric metric--text">Planning designation</div>
+    <p class="period">July 2026 milestone</p><p class="card-detail">Whole-of-precinct infrastructure designation formalised following Council&#39;s July meeting.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/Project-updates/Birkdale-Community-Precinct/About-Birkdale-Community-Precinct">Redland City Council</a></p>
+  </article>
+<article class="card">
+    <h3>Capalaba Town Centre</h3><div class="metric metric--text">$183M estimate</div>
+    <p class="period">Council update, 12 March 2026</p><p class="card-detail">Dated renewal estimate. Council&#39;s undated RIC overview gives a different $250M figure.</p>
+    <p class="card-source">Source: <a href="https://yoursay.redland.qld.gov.au/capalaba-town-centre-revitalisation-project/sales-suite-showcases-vision-for-capalaba-town-centre-revitalisation">Redland City Council, Your Say Redlands Coast</a><br>Also: <a href="https://www.redland.qld.gov.au/Business-and-investment/Redland-Investment-Corporation/Capalaba-Town-Centre-Revitalisation-Project">Capalaba Town Centre: RIC project overview</a></p>
+  </article>
+<article class="card">
+    <h3>Toondah Harbour</h3><div class="metric metric--text">Partner withdrew</div>
+    <p class="period">24 April 2026</p><p class="card-detail">Walker Group withdrew. Council and the state are considering future directions for the precinct.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/Business-and-investment/Priority-Development-Areas/Toondah-Harbour-PDA">Redland City Council</a></p>
+  </article>
+<article class="card">
+    <h3>Weinam Creek car park</h3><div class="metric metric--text">State-led design</div>
+    <p class="period">Council status, 31 July 2026</p><p class="card-detail">Land resumption completed; Economic Development Queensland progressing a design tender.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/Project-updates/Weinam-Creek-Priority-Development-Area-Project">Redland City Council</a></p>
+  </article>
+<article class="card">
+    <h3>Dunwich / Gumpi terminal</h3><div class="metric metric--text">Planning</div>
+    <p class="period">TMR update, 29 September 2026</p><p class="card-detail">May-June consultation feedback is informing the business case and concept refinement.</p>
+    <p class="card-source">Source: <a href="https://www.tmr.qld.gov.au/projects/dunwich-ferry-terminal-upgrade">Queensland Department of Transport and Main Roads</a></p>
+  </article>
+<article class="card">
+    <h3>Cleveland Town Centre</h3><div class="metric metric--text">Council update</div>
+    <p class="period">14 October 2026 meeting</p><p class="card-detail">Public agenda item 9.2. Read the meeting documents and recording for the reported position.</p>
+    <p class="card-source">Source: <a href="https://webcast.redland.qld.gov.au/archive/video26-1014.php">Redland City Council webcast</a></p>
+  </article></div>
+</section>
+<section class="dashboard-panel" id="budget" data-panel="budget" aria-labelledby="budget-heading" hidden>
+  <h2 id="budget-heading" tabindex="-1">Budget &amp; services</h2>
+  <p class="section-intro">Council&#39;s 2026-27 budget summary and the services it supports. Budget amounts are planned figures; the annual report records financial performance for the completed year.</p>
+  <div class="grid"><article class="card">
+    <h3>Operating revenue</h3><div class="metric">$468.2M</div>
+    <p class="period">2026-27 budget</p><p class="card-detail">Planned operating revenue.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">Redland City Council</a></p>
+  </article>
+<article class="card">
+    <h3>Capital works programme</h3><div class="metric">$136.2M</div>
+    <p class="period">2026-27 budget</p><p class="card-detail">Planned capital works.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">Redland City Council</a></p>
+  </article>
+<article class="card">
+    <h3>Minimum general rate</h3><div class="metric">$1,436</div>
+    <p class="period">2026-27</p><p class="card-detail">Minimum general rate, separate from the total rates notice.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">Redland City Council</a></p>
+  </article>
+<article class="card">
+    <h3>Road network</h3><div class="metric">1,170+ km</div>
+    <p class="period">2026-27 budget summary</p><p class="card-detail">Council&#39;s published road network context.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">Redland City Council</a></p>
+  </article>
+<article class="card">
+    <h3>Recreation parks</h3><div class="metric">395</div>
+    <p class="period">2026-27 budget summary</p><p class="card-detail">Council&#39;s published recreation park count.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">Redland City Council</a></p>
+  </article>
+<article class="card">
+    <h3>Library access</h3><div class="metric">6 libraries</div>
+    <p class="period">2026-27 budget summary</p><p class="card-detail">Council also provides a mobile library service.</p>
+    <p class="card-source">Source: <a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">Redland City Council</a></p>
+  </article></div>
+</section></div>
+  <nav class="section-nav" aria-label="Previous and next dashboard sections"><button type="button" data-step="-1" disabled>Previous</button><span class="view-status" id="view-status" role="status" aria-live="polite">Core, 1 of 6</span><button type="button" data-step="1">Next</button></nav>
+  <section class="official-resources" aria-labelledby="official-resources-heading">
+    <h2 id="official-resources-heading">Follow council decisions</h2>
+    <div class="resource-grid">
+      <div><h3>Read the decisions</h3><ul><li><a href="https://www.redland.qld.gov.au/About-Council/Council-meetings/Council-meeting-minutes-and-agendas">Council minutes and agendas</a></li><li><a href="https://redland.infocouncil.biz/">Open the meeting document register</a></li><li><a href="https://www.redland.qld.gov.au/About-Council/Council-meetings/Council-meeting-schedule">Meeting dates, times and location</a></li></ul></div>
+      <div><h3>Watch the meetings</h3><ul><li><a href="https://www.youtube.com/user/RedlandCityCouncil">Official Council YouTube channel</a> <span>(choose the Live tab)</span></li><li><a href="https://www.redland.qld.gov.au/About-Council/Council-meetings/Council-meeting-livestreaming-and-video-recordings">Council livestream and recording page</a></li><li><a href="https://webcast.redland.qld.gov.au/">Recordings indexed by agenda item</a></li></ul></div>
+      <div><h3>Follow the money</h3><ul><li><a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">2026-27 budget summary and rates</a></li><li><a href="https://www.redland.qld.gov.au/files/assets/public/v/1/about-council/documents/budget-publication-2026-2027.pdf">Download the full 2026-27 budget</a></li><li><a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Report">2025-26 annual report and financial results</a></li></ul></div>
+    </div>
+    <p class="resource-note">Live broadcasts appear when a meeting is in progress. Council's official pages provide the current schedule and viewing options. For deeper local analysis, explore <a href="https://www.redland.qld.gov.au/Business-and-investment/City-profile-insights-and-data">Council’s city profile and data hub</a>.</p>
+  </section>
+  <section class="sources" aria-labelledby="sources-heading"><h2 id="sources-heading">Sources and definitions</h2><details><summary>Read the source notes and reference periods</summary><ol class="source-list"><li id="source-population"><a href="https://www.qgso.qld.gov.au/issues/3106/population-growth-regional-qld-2024-25.pdf">Population growth, regional Queensland, 2024-25</a><p class="source-period">30 June 2025 preliminary estimates; revised 2024 comparison</p><p>Queensland Government Statistician&#39;s Office, using ABS Regional population released 31 March 2026. Tables 1 and 2 report Redland City population and annual population increase. These are estimated resident population figures, not Census counts.</p></li>
+<li id="source-census"><a href="https://www.abs.gov.au/census/find-census-data/quickstats/2021/LGA36250">Redland 2021 Census All persons QuickStats</a><p class="source-period">2021 Census, Redland local government area</p><p>Australian Bureau of Statistics. The median age is a 2021 Census measure. It is not presented as a 2026 estimate.</p></li>
+<li id="source-economy"><a href="https://www.redland.qld.gov.au/files/assets/public/v/3/community-safety-and-health/documents/20251219-local-disaster-management-plan-control-copy.pdf">Local Disaster Management Plan, December 2025, pages 31-32</a><p class="source-period">2024 economic snapshot and 2023-24 industry measures</p><p>Redland City Council, reproducing NIEIR and ABS economic data. Figures 9 and 10 identify NIEIR 2024 estimates for GRP, local jobs and employed residents, and ABS 2024 for businesses. The tourism and agriculture section reports 2023-24 measures. These are dated observations, not live or newly estimated 2026 figures.</p></li>
+<li id="source-profiles"><a href="https://www.redland.qld.gov.au/Business-and-investment/City-profile-insights-and-data">City profile, insights and data</a><p class="source-period">Council&#39;s current profile and research hub</p><p>Redland City Council. Provides economic, community, housing and industry profiles and downloadable snapshots. Each linked publication has its own reference period.</p></li>
+<li id="source-southernIslands"><a href="https://www.redland.qld.gov.au/files/assets/public/v/1/business-and-investment/documents/city-profile-and-data-hub/southern_moreton_bay_islands.pdf">Southern Moreton Bay Islands demographic and employment snapshot</a><p class="source-period">2021 Census</p><p>Redland City Council, using the 2021 ABS Census. The snapshot&#39;s Southern Moreton Bay Islands statistical geography includes Coochiemudlo Island. Its figures must not be described as the population of only Russell, Macleay, Lamb and Karragarra islands.</p></li>
+<li id="source-minjerribah"><a href="https://www.redland.qld.gov.au/files/sharedassets/public/v/1/business-and-investment/city-profile-and-data-hub/north_stradbroke_island__minjerribah_.pdf">North Stradbroke Island / Minjerribah demographic and employment snapshot</a><p class="source-period">2021 Census</p><p>Redland City Council, using the 2021 ABS Census. Reports whole-island population, median age and age composition. These are Census observations, not current visitor numbers or 2026 population estimates.</p></li>
+<li id="source-budget"><a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget">Annual Budget 2026-27</a><p class="source-period">2026-27 adopted budget</p><p>Redland City Council. Budgeted revenue and capital works are plans, not actual spending. The 5.47% general-rate comparison applies to the median owner-occupied Category 1A property and is separate from utility and other charges.</p></li>
+<li id="source-budgetDocument"><a href="https://www.redland.qld.gov.au/files/assets/public/v/1/about-council/documents/budget-publication-2026-2027.pdf">Budget Publication 2026-2027 (PDF, 29 MB)</a><p class="source-period">2026-27</p><p>Redland City Council. The full document is linked from Council&#39;s annual budget page. Dashboard budget figures are checked against that page&#39;s published summary.</p></li>
+<li id="source-annualReport"><a href="https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Report">Annual Report and Community Financial Report 2025-26</a><p class="source-period">2025-26, adopted 14 October 2026</p><p>Redland City Council. Links to the latest annual report, financial statements and community financial report, separate from the forward budget.</p></li>
+<li id="source-minutes"><a href="https://www.redland.qld.gov.au/About-Council/Council-meetings/Council-meeting-minutes-and-agendas">Council meeting minutes and agendas</a><p class="source-period">Current official meeting document access</p><p>Redland City Council. Council links to its InfoCouncil register and states that minutes from 2007 onwards are available online.</p></li>
+<li id="source-meetingRegister"><a href="https://redland.infocouncil.biz/">InfoCouncil meeting document register</a><p class="source-period">Current official agendas and minutes</p><p>Redland City Council. This is the register linked from Council&#39;s minutes and agendas page.</p></li>
+<li id="source-livestream"><a href="https://www.redland.qld.gov.au/About-Council/Council-meetings/Council-meeting-livestreaming-and-video-recordings">Council meeting livestreaming and video recordings</a><p class="source-period">Current meeting viewing routes</p><p>Redland City Council. Council directs residents to its webcast archive and official YouTube channel for live and recorded meetings.</p></li>
+<li id="source-youtube"><a href="https://www.youtube.com/user/RedlandCityCouncil">Redland City Council on YouTube</a><p class="source-period">Official channel</p><p>Redland City Council. This exact channel address is linked from Council&#39;s website. The Live tab contains live and recorded broadcasts; broadcasts are only live when a meeting is in progress.</p></li>
+<li id="source-webcast"><a href="https://webcast.redland.qld.gov.au/">Council meeting webcast archive</a><p class="source-period">Recordings from September 2015 onwards</p><p>Redland City Council. The current archive listed the 14 October 2026 General Meeting when checked.</p></li>
+<li id="source-schedule"><a href="https://www.redland.qld.gov.au/About-Council/Council-meetings/Council-meeting-schedule">Council meeting schedule</a><p class="source-period">Official schedule</p><p>Redland City Council. Check Council&#39;s schedule for the meeting date, time and location before attending or watching.</p></li>
+<li id="source-birkdale"><a href="https://www.redland.qld.gov.au/Project-updates/Birkdale-Community-Precinct/About-Birkdale-Community-Precinct">About Birkdale Community Precinct</a><p class="source-period">Planning update following the July 2026 General Meeting</p><p>Redland City Council. Council reports that the whole-of-precinct Local Government Infrastructure Designation was formalised. This is a planning milestone, not a statement that the precinct or whitewater centre is complete.</p></li>
+<li id="source-capalaba"><a href="https://yoursay.redland.qld.gov.au/capalaba-town-centre-revitalisation-project/sales-suite-showcases-vision-for-capalaba-town-centre-revitalisation">Capalaba Town Centre: sales suite and project update</a><p class="source-period">12 March 2026</p><p>Redland City Council, Your Say Redlands Coast. The dated Council update describes a $183 million renewal project. This differs from the undated $250 million figure on Council&#39;s RIC overview, so the dashboard identifies the date of the chosen estimate.</p></li>
+<li id="source-capalabaOverview"><a href="https://www.redland.qld.gov.au/Business-and-investment/Redland-Investment-Corporation/Capalaba-Town-Centre-Revitalisation-Project">Capalaba Town Centre: RIC project overview</a><p class="source-period">Undated overview, checked 9 November 2026</p><p>Redland City Council. The overview gives a $250 million estimate. The dated 12 March 2026 update gives $183 million. The dashboard identifies both sources without inferring the undated page&#39;s age or a final project cost.</p></li>
+<li id="source-toondah"><a href="https://www.redland.qld.gov.au/Business-and-investment/Priority-Development-Areas/Toondah-Harbour-PDA">Toondah Harbour PDA: current status and next steps</a><p class="source-period">24 April 2026 update</p><p>Redland City Council. Council acknowledges Walker Group&#39;s withdrawal as development partner and describes work with the Queensland Government on future directions.</p></li>
+<li id="source-weinam"><a href="https://www.redland.qld.gov.au/Project-updates/Weinam-Creek-Priority-Development-Area-Project">Weinam Creek Priority Development Area Project</a><p class="source-period">Status as at 31 July 2026</p><p>Redland City Council. Council reports completed land resumption and a state-led EDQ design tender for the multi-storey car park.</p></li>
+<li id="source-dunwich"><a href="https://www.tmr.qld.gov.au/projects/dunwich-ferry-terminal-upgrade">Dunwich Ferry Terminal Upgrade</a><p class="source-period">Updated 29 September 2026</p><p>Queensland Department of Transport and Main Roads. TMR identifies the project as planning and says feedback from May-June 2026 consultation will inform the business case. The page gives different dates for planning and business-case completion, so no completion deadline is inferred here.</p></li>
+<li id="source-cleveland"><a href="https://webcast.redland.qld.gov.au/archive/video26-1014.php">14 October 2026 Council meeting: Cleveland Town Centre update</a><p class="source-period">14 October 2026</p><p>Redland City Council webcast. Public agenda item 9.2 is Cleveland Town Centre Revitalisation Project Update; a separate confidential update appears at item 19.4. A listed item alone does not establish a project value or delivery milestone.</p></li></ol></details></section>
+</main>
+<footer class="page-footer"><p>Independent work by Luke Nathan Hayes / Strange But True / Aura of Intelligence. This site is separate from Redland City Council.</p><nav aria-label="Footer"><a href="https://auraofintelligence.github.io/redlands-mayoral-campaign/">Luke’s Redlands projects</a><a href="https://auraofintelligence.github.io/strange-but-true/">Strange But True</a><a href="https://github.com/auraofintelligence/open-record-luke-nathan-hayes/blob/main/README.md">Luke’s Open Record (public document)</a><a href="licence.html">Strange But True Public Source Licence</a></nav></footer>
+<a class="to-top" href="#top">Top ↑</a>
 </body>
 </html>

@@ -1,0 +1,239 @@
+{
+  "checked": "2026-11-09",
+  "sources": {
+    "population": {
+      "title": "Population growth, regional Queensland, 2024-25",
+      "publisher": "Queensland Government Statistician's Office, using ABS Regional population released 31 March 2026",
+      "url": "https://www.qgso.qld.gov.au/issues/3106/population-growth-regional-qld-2024-25.pdf",
+      "period": "30 June 2025 preliminary estimates; revised 2024 comparison",
+      "note": "Tables 1 and 2 report Redland City population and annual population increase. These are estimated resident population figures, not Census counts."
+    },
+    "census": {
+      "title": "Redland 2021 Census All persons QuickStats",
+      "publisher": "Australian Bureau of Statistics",
+      "url": "https://www.abs.gov.au/census/find-census-data/quickstats/2021/LGA36250",
+      "period": "2021 Census, Redland local government area",
+      "note": "The median age is a 2021 Census measure. It is not presented as a 2026 estimate."
+    },
+    "economy": {
+      "title": "Local Disaster Management Plan, December 2025, pages 31-32",
+      "publisher": "Redland City Council, reproducing NIEIR and ABS economic data",
+      "url": "https://www.redland.qld.gov.au/files/assets/public/v/3/community-safety-and-health/documents/20251219-local-disaster-management-plan-control-copy.pdf",
+      "period": "2024 economic snapshot and 2023-24 industry measures",
+      "note": "Figures 9 and 10 identify NIEIR 2024 estimates for GRP, local jobs and employed residents, and ABS 2024 for businesses. The tourism and agriculture section reports 2023-24 measures. These are dated observations, not live or newly estimated 2026 figures."
+    },
+    "profiles": {
+      "title": "City profile, insights and data",
+      "publisher": "Redland City Council",
+      "url": "https://www.redland.qld.gov.au/Business-and-investment/City-profile-insights-and-data",
+      "period": "Council's current profile and research hub",
+      "note": "Provides economic, community, housing and industry profiles and downloadable snapshots. Each linked publication has its own reference period."
+    },
+    "southernIslands": {
+      "title": "Southern Moreton Bay Islands demographic and employment snapshot",
+      "publisher": "Redland City Council, using the 2021 ABS Census",
+      "url": "https://www.redland.qld.gov.au/files/assets/public/v/1/business-and-investment/documents/city-profile-and-data-hub/southern_moreton_bay_islands.pdf",
+      "period": "2021 Census",
+      "note": "The snapshot's Southern Moreton Bay Islands statistical geography includes Coochiemudlo Island. Its figures must not be described as the population of only Russell, Macleay, Lamb and Karragarra islands."
+    },
+    "minjerribah": {
+      "title": "North Stradbroke Island / Minjerribah demographic and employment snapshot",
+      "publisher": "Redland City Council, using the 2021 ABS Census",
+      "url": "https://www.redland.qld.gov.au/files/sharedassets/public/v/1/business-and-investment/city-profile-and-data-hub/north_stradbroke_island__minjerribah_.pdf",
+      "period": "2021 Census",
+      "note": "Reports whole-island population, median age and age composition. These are Census observations, not current visitor numbers or 2026 population estimates."
+    },
+    "budget": {
+      "title": "Annual Budget 2026-27",
+      "publisher": "Redland City Council",
+      "url": "https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Budget",
+      "period": "2026-27 adopted budget",
+      "note": "Budgeted revenue and capital works are plans, not actual spending. The 5.47% general-rate comparison applies to the median owner-occupied Category 1A property and is separate from utility and other charges."
+    },
+    "budgetDocument": {
+      "title": "Budget Publication 2026-2027 (PDF, 29 MB)",
+      "publisher": "Redland City Council",
+      "url": "https://www.redland.qld.gov.au/files/assets/public/v/1/about-council/documents/budget-publication-2026-2027.pdf",
+      "period": "2026-27",
+      "note": "The full document is linked from Council's annual budget page. Dashboard budget figures are checked against that page's published summary."
+    },
+    "annualReport": {
+      "title": "Annual Report and Community Financial Report 2025-26",
+      "publisher": "Redland City Council",
+      "url": "https://www.redland.qld.gov.au/About-Council/Strategy-Planning-and-Policy/Council-plans-and-financial-information/Annual-Report",
+      "period": "2025-26, adopted 14 October 2026",
+      "note": "Links to the latest annual report, financial statements and community financial report, separate from the forward budget."
+    },
+    "minutes": {
+      "title": "Council meeting minutes and agendas",
+      "publisher": "Redland City Council",
+      "url": "https://www.redland.qld.gov.au/About-Council/Council-meetings/Council-meeting-minutes-and-agendas",
+      "period": "Current official meeting document access",
+      "note": "Council links to its InfoCouncil register and states that minutes from 2007 onwards are available online."
+    },
+    "meetingRegister": {
+      "title": "InfoCouncil meeting document register",
+      "publisher": "Redland City Council",
+      "url": "https://redland.infocouncil.biz/",
+      "period": "Current official agendas and minutes",
+      "note": "This is the register linked from Council's minutes and agendas page."
+    },
+    "livestream": {
+      "title": "Council meeting livestreaming and video recordings",
+      "publisher": "Redland City Council",
+      "url": "https://www.redland.qld.gov.au/About-Council/Council-meetings/Council-meeting-livestreaming-and-video-recordings",
+      "period": "Current meeting viewing routes",
+      "note": "Council directs residents to its webcast archive and official YouTube channel for live and recorded meetings."
+    },
+    "youtube": {
+      "title": "Redland City Council on YouTube",
+      "publisher": "Redland City Council",
+      "url": "https://www.youtube.com/user/RedlandCityCouncil",
+      "period": "Official channel",
+      "note": "This exact channel address is linked from Council's website. The Live tab contains live and recorded broadcasts; broadcasts are only live when a meeting is in progress."
+    },
+    "webcast": {
+      "title": "Council meeting webcast archive",
+      "publisher": "Redland City Council",
+      "url": "https://webcast.redland.qld.gov.au/",
+      "period": "Recordings from September 2015 onwards",
+      "note": "The current archive listed the 14 October 2026 General Meeting when checked."
+    },
+    "schedule": {
+      "title": "Council meeting schedule",
+      "publisher": "Redland City Council",
+      "url": "https://www.redland.qld.gov.au/About-Council/Council-meetings/Council-meeting-schedule",
+      "period": "Official schedule",
+      "note": "Check Council's schedule for the meeting date, time and location before attending or watching."
+    },
+    "birkdale": {
+      "title": "About Birkdale Community Precinct",
+      "publisher": "Redland City Council",
+      "url": "https://www.redland.qld.gov.au/Project-updates/Birkdale-Community-Precinct/About-Birkdale-Community-Precinct",
+      "period": "Planning update following the July 2026 General Meeting",
+      "note": "Council reports that the whole-of-precinct Local Government Infrastructure Designation was formalised. This is a planning milestone, not a statement that the precinct or whitewater centre is complete."
+    },
+    "capalaba": {
+      "title": "Capalaba Town Centre: sales suite and project update",
+      "publisher": "Redland City Council, Your Say Redlands Coast",
+      "url": "https://yoursay.redland.qld.gov.au/capalaba-town-centre-revitalisation-project/sales-suite-showcases-vision-for-capalaba-town-centre-revitalisation",
+      "period": "12 March 2026",
+      "note": "The dated Council update describes a $183 million renewal project. This differs from the undated $250 million figure on Council's RIC overview, so the dashboard identifies the date of the chosen estimate."
+    },
+    "capalabaOverview": {
+      "title": "Capalaba Town Centre: RIC project overview",
+      "publisher": "Redland City Council",
+      "url": "https://www.redland.qld.gov.au/Business-and-investment/Redland-Investment-Corporation/Capalaba-Town-Centre-Revitalisation-Project",
+      "period": "Undated overview, checked 9 November 2026",
+      "note": "The overview gives a $250 million estimate. The dated 12 March 2026 update gives $183 million. The dashboard identifies both sources without inferring the undated page's age or a final project cost."
+    },
+    "toondah": {
+      "title": "Toondah Harbour PDA: current status and next steps",
+      "publisher": "Redland City Council",
+      "url": "https://www.redland.qld.gov.au/Business-and-investment/Priority-Development-Areas/Toondah-Harbour-PDA",
+      "period": "24 April 2026 update",
+      "note": "Council acknowledges Walker Group's withdrawal as development partner and describes work with the Queensland Government on future directions."
+    },
+    "weinam": {
+      "title": "Weinam Creek Priority Development Area Project",
+      "publisher": "Redland City Council",
+      "url": "https://www.redland.qld.gov.au/Project-updates/Weinam-Creek-Priority-Development-Area-Project",
+      "period": "Status as at 31 July 2026",
+      "note": "Council reports completed land resumption and a state-led EDQ design tender for the multi-storey car park."
+    },
+    "dunwich": {
+      "title": "Dunwich Ferry Terminal Upgrade",
+      "publisher": "Queensland Department of Transport and Main Roads",
+      "url": "https://www.tmr.qld.gov.au/projects/dunwich-ferry-terminal-upgrade",
+      "period": "Updated 29 September 2026",
+      "note": "TMR identifies the project as planning and says feedback from May-June 2026 consultation will inform the business case. The page gives different dates for planning and business-case completion, so no completion deadline is inferred here."
+    },
+    "cleveland": {
+      "title": "14 October 2026 Council meeting: Cleveland Town Centre update",
+      "publisher": "Redland City Council webcast",
+      "url": "https://webcast.redland.qld.gov.au/archive/video26-1014.php",
+      "period": "14 October 2026",
+      "note": "Public agenda item 9.2 is Cleveland Town Centre Revitalisation Project Update; a separate confidential update appears at item 19.4. A listed item alone does not establish a project value or delivery milestone."
+    }
+  },
+  "views": [
+    {
+      "id": "core",
+      "title": "Core",
+      "intro": "A dated overview of Redland City. Population estimates, Census measures and economic models cover different periods.",
+      "cards": [
+        {"title":"Resident population","metric":"172,831","period":"30 June 2025","detail":"Preliminary estimated resident population, Redland City.","source":"population"},
+        {"title":"Annual population increase","metric":"+2,891","period":"2024-25","detail":"Additional residents using the revised 2024 comparison.","source":"population"},
+        {"title":"Gross regional product","metric":"$8.01B","period":"Year ending June 2024","detail":"NIEIR modelled estimate, reproduced in Council's December 2025 plan.","source":"economy"},
+        {"title":"Local jobs","metric":"55,454","period":"2024 economic snapshot","detail":"Jobs located in Redland City, rather than the number of employed residents.","source":"economy"},
+        {"title":"Local businesses","metric":"12,821","period":"ABS 2024","detail":"Business count reported in Council's economic snapshot.","source":"economy"},
+        {"title":"Median age","metric":"43 years","period":"2021 Census","detail":"Redland local government area. This is a Census measure, not a 2026 estimate.","source":"census"}
+      ]
+    },
+    {
+      "id": "economy",
+      "title": "Economy",
+      "intro": "Economic measures verified in Council's December 2025 Local Disaster Management Plan. Output, value added and employment measure different things.",
+      "cards": [
+        {"title":"Largest industry in snapshot","metric":"Health care & social assistance","period":"2024 economic snapshot","detail":"Industry identified in Council's published economic snapshot.","source":"economy","textMetric":true},
+        {"title":"Employed residents","metric":"89,006","period":"2024 economic snapshot","detail":"Employed Redland residents, including people whose jobs are outside the city.","source":"economy"},
+        {"title":"Direct tourism output","metric":"$433.88M","period":"2023-24","detail":"Direct tourism output and sales.","source":"economy"},
+        {"title":"Direct tourism value added","metric":"$232.88M","period":"2023-24","detail":"Tourism's direct contribution to value added, distinct from sales.","source":"economy"},
+        {"title":"Direct tourism employment","metric":"2,974 jobs","period":"2023-24","detail":"Reported as 5.4% of local industry employment.","source":"economy"},
+        {"title":"Agriculture, forestry & fishing","metric":"$209.7M","period":"2023-24","detail":"Industry output, not household income or farm profit.","source":"economy"}
+      ]
+    },
+    {
+      "id": "system",
+      "title": "Household costs",
+      "intro": "Council's 2026-27 rates and charges. The general-rate percentage is one component of a rates notice; utility and separate charges have their own changes.",
+      "cards": [
+        {"title":"Median general-rate increase","metric":"5.47%","period":"2026-27","detail":"Owner-occupied Category 1A median property: about $85.30 a year. Other properties differ.","source":"budget"},
+        {"title":"Water and wastewater","metric":"+10.2%","period":"2026-27","detail":"Published increase for fixed and consumption charges.","source":"budget"},
+        {"title":"Waste utility charge","metric":"+18.53%","period":"2026-27","detail":"Amount depends on the household's bin combination.","source":"budget"},
+        {"title":"Environment and coastal charge","metric":"$280.48","period":"2026-27, per year","detail":"Separate charge, an increase of 8.71%.","source":"budget"},
+        {"title":"Landfill remediation charge","metric":"$99.52","period":"2026-27, per year","detail":"Separate charge, an increase of 28.25%.","source":"budget"},
+        {"title":"Pensioner council rebate","metric":"$335 / $167.50","period":"2026-27, per year","detail":"Full / part pensioners respectively, subject to eligibility.","source":"budget"}
+      ]
+    },
+    {
+      "id": "islands",
+      "title": "Islands",
+      "intro": "2021 Census baselines for two island geographies. Council's Southern Moreton Bay Islands snapshot includes Coochiemudlo, as well as the four SMBI islands. These are resident counts, not visitor numbers.",
+      "cards": [
+        {"title":"Southern island population","metric":"8,481","period":"2021 Census","detail":"Southern Moreton Bay Islands statistical area, including Coochiemudlo.","source":"southernIslands"},
+        {"title":"Southern islands median age","metric":"61 years","period":"2021 Census","detail":"Same statistical area, including Coochiemudlo.","source":"southernIslands"},
+        {"title":"Southern islands aged 65+","metric":"39.6%","period":"2021 Census","detail":"Share of residents in the same statistical area.","source":"southernIslands"},
+        {"title":"Minjerribah population","metric":"2,156","period":"2021 Census","detail":"North Stradbroke Island as a whole.","source":"minjerribah"},
+        {"title":"Minjerribah median age","metric":"52 years","period":"2021 Census","detail":"Whole-island resident population.","source":"minjerribah"},
+        {"title":"Minjerribah aged 65+","metric":"29.4%","period":"2021 Census","detail":"Share of whole-island residents.","source":"minjerribah"}
+      ]
+    },
+    {
+      "id": "projects",
+      "title": "Projects",
+      "intro": "Dated updates from the responsible public bodies. Planning milestones, project estimates and construction are distinguished below.",
+      "cards": [
+        {"title":"Birkdale Community Precinct","metric":"Planning designation","period":"July 2026 milestone","detail":"Whole-of-precinct infrastructure designation formalised following Council's July meeting.","source":"birkdale","textMetric":true},
+        {"title":"Capalaba Town Centre","metric":"$183M estimate","period":"Council update, 12 March 2026","detail":"Dated renewal estimate. Council's undated RIC overview gives a different $250M figure.","source":"capalaba","additionalSources":["capalabaOverview"],"textMetric":true},
+        {"title":"Toondah Harbour","metric":"Partner withdrew","period":"24 April 2026","detail":"Walker Group withdrew. Council and the state are considering future directions for the precinct.","source":"toondah","textMetric":true},
+        {"title":"Weinam Creek car park","metric":"State-led design","period":"Council status, 31 July 2026","detail":"Land resumption completed; Economic Development Queensland progressing a design tender.","source":"weinam","textMetric":true},
+        {"title":"Dunwich / Gumpi terminal","metric":"Planning","period":"TMR update, 29 September 2026","detail":"May-June consultation feedback is informing the business case and concept refinement.","source":"dunwich","textMetric":true},
+        {"title":"Cleveland Town Centre","metric":"Council update","period":"14 October 2026 meeting","detail":"Public agenda item 9.2. Read the meeting documents and recording for the reported position.","source":"cleveland","textMetric":true}
+      ]
+    },
+    {
+      "id": "budget",
+      "title": "Budget & services",
+      "intro": "Council's 2026-27 budget summary and the services it supports. Budget amounts are planned figures; the annual report records financial performance for the completed year.",
+      "cards": [
+        {"title":"Operating revenue","metric":"$468.2M","period":"2026-27 budget","detail":"Planned operating revenue.","source":"budget"},
+        {"title":"Capital works programme","metric":"$136.2M","period":"2026-27 budget","detail":"Planned capital works.","source":"budget"},
+        {"title":"Minimum general rate","metric":"$1,436","period":"2026-27","detail":"Minimum general rate, separate from the total rates notice.","source":"budget"},
+        {"title":"Road network","metric":"1,170+ km","period":"2026-27 budget summary","detail":"Council's published road network context.","source":"budget"},
+        {"title":"Recreation parks","metric":"395","period":"2026-27 budget summary","detail":"Council's published recreation park count.","source":"budget"},
+        {"title":"Library access","metric":"6 libraries","period":"2026-27 budget summary","detail":"Council also provides a mobile library service.","source":"budget"}
+      ]
+    }
+  ]
+}

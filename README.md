@@ -2,19 +2,38 @@
 
 > **Status: independent draft and prototype.** This is not a Redland City Council publication, an adopted strategy, an official service or an authoritative data source.
 
-This project is a compact, single-page dashboard that explores high-level economic, system-stress, island and project signals for Redlands Coast. It is a visual thinking prototype accompanying independent economic-strategy discussion, not a replacement for council research, community process or an official plan.
+This project is a compact, single-page dashboard of sourced population, economy, household-cost, island, project and council-budget information for Redlands Coast. It accompanies independent economic-strategy discussion and links residents to official documents and meeting broadcasts.
 
 Visit the [public dashboard](https://auraofintelligence.github.io/Redlands_draft_ES2026-2031/) or review the [GitHub repository](https://github.com/auraofintelligence/Redlands_draft_ES2026-2031).
 
 ## Read it as a draft
 
-The page groups embedded prototype cards into Core, Economy, System Stress, Islands and Projects views. Its figures and labels are part of the draft visualisation, so they must be checked against current, authoritative sources before use in a decision, report or public claim.
+Sources were checked on **9 November 2026**. The page has six views: Core, Economy, Household costs, Islands, Projects, and Budget & services. Each card identifies its reference period and public source. Budget figures describe 2026-27; Census figures describe 2021; the economic figures identify their earlier reference periods. This is a dated snapshot, not a live data feed.
+
+Core is present in the initial HTML, so the dashboard opens with content before JavaScript runs. Section switching supports direct section links, Previous and Next buttons, and a floating Top link. With JavaScript disabled, all sections remain readable.
+
+Council minutes, agendas, the budget, financial results, the official YouTube channel, live-meeting page and indexed webcast recordings are linked directly. A broadcast is only live when a meeting is in progress.
 
 ## Find your way around
 
-- [index.html](index.html) contains the dashboard layout, embedded card data and view-switching code.
-- [assets](assets) contains the site favicon files.
+- [index.html](index.html) is the generated, complete public page.
+- [data/dashboard.json](data/dashboard.json) contains dated cards and source notes.
+- [assets/dashboard.js](assets/dashboard.js) controls section switching without relying on an implicit browser click event.
+- [assets/site.css](assets/site.css) retains the ocean and teal visual style and adds responsive and print layouts.
+- [scripts/build.mjs](scripts/build.mjs) generates the page using Node.js, with no external packages.
+- [docs/SOURCE-REFRESH-2026-11-09.md](docs/SOURCE-REFRESH-2026-11-09.md) records the research boundaries and material updates.
+- [assets](assets) also contains the existing raster favicon files.
 - [LICENCE.md](LICENCE.md) sets the public-source terms for this repository.
+
+## Update the dashboard
+
+Edit `data/dashboard.json`, preserve each measure's period and definition, then run:
+
+```sh
+node scripts/build.mjs
+```
+
+Check the initial Core view, section links, Previous/Next controls and local assets before publishing. Rechecking a source does not turn an older observation into a current-year estimate.
 
 <!-- github-organisation:start -->
 
